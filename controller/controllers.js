@@ -51,6 +51,8 @@ exports.postMasyarakat = async (req, res) => {
 
 exports.updateMasyarakat = async (req, res) => {
   try {
+    const findData = await Masyarakat.findOne({ where : { nik: req.params.nik}})
+    if (!findData) return res.status(404).json({msg: 'Data tidak ditemukan'})
     const request = Masyarakat.update(
       {
         nama: req.body.nama,
@@ -60,7 +62,7 @@ exports.updateMasyarakat = async (req, res) => {
       },
       { where: { nik: req.params.nik } }
     );
-    res.status(200).json({ msg: `Data ${req.params.nik} berhasil diupdate` });
+    res.status(200).json({ msg: `Data ${findData.nama} berhasil diupdate` });
   } catch (error) {
     console.log(error.message);
   }
@@ -113,6 +115,8 @@ exports.postPetugas = async (req, res) => {
 
 exports.updatePetugas = async (req, res) => {
   try {
+    const findData = await Petugas.findOne({ where : { id_petugas: req.params.id}})
+    if (!findData) return res.status(404).json({msg: 'Data tidak ditemukan'})
     const request = Petugas.update(
       {
         nama: req.body.nama,

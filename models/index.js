@@ -16,6 +16,10 @@ Tanggapan.belongsTo(Petugas,{
     foreignKey:"id_petugas",
 })
 
+Masyarakat.belongsTo(Pengaduan, {
+    foreignKey: "nik"
+})
+
 Petugas.hasMany(Tanggapan,{
     foreignKey:"id_petugas"
 })
